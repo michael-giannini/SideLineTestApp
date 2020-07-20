@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.sidelinetestapp">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/simpl_launch"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/simpl_launch_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".TaskSwitchInstructions"
+            android:parentActivityName=".Main2Activity"
+            android:label="Task Switch Instructions">
+
+        </activity>
+        <activity
+            android:name=".SpatialTaskSwitch"
+            android:label="Task Switching Test"
+            android:requestLegacyExternalStorage="true"
+            android:screenOrientation="sensorPortrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sidelinetestapp.SpatialTaskSwitch" />
+        </activity>
+        <activity
+            android:name=".saccadeInstructions"
+            android:label="Saccade Instructions"
+            android:parentActivityName=".Main2Activity"
+            android:screenOrientation="sensorPortrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sidelinetestapp.saccadeInstructions" />
+        </activity>
+        <activity
+            android:name=".AntiSaccade"
+            android:label="Anti Saccade Test"
+            android:parentActivityName=".saccadeInstructions"
+            android:requestLegacyExternalStorage="true"
+            android:screenOrientation="sensorPortrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sidelinetestapp.AntiSaccade" />
+        </activity>
+        <activity
+            android:name=".NumericTaskSwitch"
+            android:label="Task Switching Test"
+            android:parentActivityName=".TaskSwitchInstructions"
+            android:requestLegacyExternalStorage="true"
+            android:screenOrientation="sensorPortrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sidelinetestapp.NumericTaskSwitch" />
+        </activity>
+        <activity
+            android:name=".Main2Activity"
+            android:label="Participant Information"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="sensorPortrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sidelinetestapp.Main2Activity" />
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="Sideline Neurological Test App"
+            android:screenOrientation="sensorPortrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

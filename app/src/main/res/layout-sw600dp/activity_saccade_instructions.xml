@@ -1,0 +1,178 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".saccadeInstructions">
+
+    <TextView
+        android:id="@+id/article_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/padding_regular"
+        android:text="@string/article_title"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/table_header_text"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/article_heading">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/Intro_subheading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_regular"
+                android:text="@string/introduction"
+                android:textSize="@dimen/tablet_header1_text"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
+
+            <TextView
+                android:id="@+id/IntroInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:lineSpacingExtra="@dimen/line_spacing"
+                android:padding="@dimen/padding_regular"
+                android:text="@string/SaccadeIntroductionText"
+                android:textSize="@dimen/tablet_article_text" />
+
+            <TextView
+                android:id="@+id/Step1Heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_regular"
+                android:text="@string/Step1SaccadeHeader"
+                android:textSize="@dimen/tablet_header1_text"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
+
+            <TextView
+                android:id="@+id/Step1Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:lineSpacingExtra="@dimen/line_spacing"
+                android:padding="@dimen/padding_regular"
+                android:text="@string/Step1Saccade"
+                android:textSize="@dimen/tablet_article_text" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="227dp"
+                app:srcCompat="@drawable/longtouchsaccade" />
+
+            <TextView
+                android:id="@+id/Step2Heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_regular"
+                android:text="@string/Step2SaccadeHeader"
+                android:textSize="@dimen/tablet_header1_text"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
+
+            <TextView
+                android:id="@+id/Step2Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:lineSpacingExtra="@dimen/line_spacing"
+                android:padding="@dimen/padding_regular"
+                android:text="@string/Step2Saccade"
+                android:textSize="@dimen/tablet_article_text" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="242dp"
+                app:srcCompat="@drawable/propointpic" />
+
+            <TextView
+                android:id="@+id/Step3Heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_regular"
+                android:text="@string/Step3SaccadeHeader"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault"
+                android:textSize="@dimen/tablet_header1_text" />
+
+            <TextView
+                android:id="@+id/Step3Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:lineSpacingExtra="@dimen/line_spacing"
+                android:padding="@dimen/padding_regular"
+                android:text="@string/Step3Saccade"
+                android:textSize="@dimen/tablet_article_text" />
+
+            <TextView
+                android:id="@+id/Step4Heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_regular"
+                android:text="@string/Step4SaccadeHeader"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault"
+                android:textSize="@dimen/tablet_header1_text" />
+
+            <TextView
+                android:id="@+id/Step4Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:lineSpacingExtra="@dimen/line_spacing"
+                android:padding="@dimen/padding_regular"
+                android:text="@string/Step4Saccade"
+                android:textSize="@dimen/tablet_article_text" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="227dp"
+                app:srcCompat="@drawable/longtouchsaccade" />
+
+            <TextView
+                android:id="@+id/Step5Heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_regular"
+                android:text="@string/Step5SaccadeHeader"
+                android:textAppearance="@android:style/TextAppearance.DeviceDefault"
+                android:textSize="@dimen/tablet_header1_text" />
+
+            <TextView
+                android:id="@+id/Step5Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:lineSpacingExtra="@dimen/line_spacing"
+                android:padding="@dimen/padding_regular"
+                android:text="@string/Step5Saccade"
+                android:textSize="@dimen/tablet_article_text" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="227dp"
+                app:srcCompat="@drawable/antipointpic" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/start_test"
+                android:onClick="launchAntiSaccadeTest"
+                android:textSize="@dimen/tablet_button_text" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

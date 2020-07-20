@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NumericTaskSwitch">
+
+    <TextView
+        android:id="@+id/taskSwitchRandomNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5"
+        android:textSize="@dimen/table_header_text"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.287" />
+
+    <Button
+        android:id="@+id/taskSwitchStartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startTest"
+        android:text="@string/start"
+        android:textSize="@dimen/phone_head1_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.291" />
+
+    <Button
+        android:id="@+id/taskSwitchLeftButton"
+        android:layout_width="175dp"
+        android:layout_height="150dp"
+        android:layout_margin="5dp"
+        android:enabled="false"
+        android:onClick="leftButtonClick"
+        android:text="@string/primaryInput"
+        android:textSize="@dimen/tablet_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/taskSwitchRightButton"
+        android:layout_width="175dp"
+        android:layout_height="150dp"
+        android:layout_margin="5dp"
+        android:enabled="false"
+        android:onClick="rightButtonClick"
+        android:text="@string/primaryInput2"
+        android:textSize="@dimen/tablet_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/taskSwitchLeftButtonMinus"
+        android:layout_width="175dp"
+        android:layout_height="150dp"
+        android:layout_margin="5dp"
+        android:enabled="false"
+        android:onClick="leftButtonClick"
+        android:text="@string/primaryInputMinus"
+        android:textSize="@dimen/tablet_button_text"
+        app:layout_constraintBottom_toTopOf="@+id/taskSwitchLeftButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/taskSwitchRightButtonPlus"
+        android:layout_width="175dp"
+        android:layout_height="150dp"
+        android:layout_margin="5dp"
+        android:enabled="false"
+        android:onClick="rightButtonClick"
+        android:text="@string/primaryInput2Plus"
+        android:textSize="@dimen/tablet_button_text"
+        app:layout_constraintBottom_toTopOf="@+id/taskSwitchRightButton"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
