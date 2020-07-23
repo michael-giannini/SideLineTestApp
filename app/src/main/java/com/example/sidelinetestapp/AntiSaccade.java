@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.preference.PreferenceManager;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.Image;
 import android.net.Uri;
@@ -37,7 +39,8 @@ import java.util.Date;
 
 public class AntiSaccade extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private static final int TEST_STOP = 14; //According to the paper, this should be 48
+
+    private static int TEST_STOP; //According to the paper, this should be 48
     private static final int NUM_TARGETS = 4; //Only change if more targets are added
 
     private ImageView[] target = new ImageView[NUM_TARGETS];
@@ -58,8 +61,8 @@ public class AntiSaccade extends AppCompatActivity {
     private long elapsedStartTime;
     private long elapsedEndTime;
 
-    private double[] initiationTime = new double[TEST_STOP]; //holds all times
-    private double[] movementTime = new double[TEST_STOP]; //holds all times
+    private double[] initiationTime;// = new double[TEST_STOP]; //holds all times
+    private double[] movementTime; //= new double[TEST_STOP]; //holds all times
     private double[] avgInitiationTime = new double[2];
     private double[] avgMovementTime = new double[2];
     private double[] avgTotalTime = new double[2];
@@ -74,6 +77,10 @@ public class AntiSaccade extends AppCompatActivity {
     private double[] proPointMoveTimes;
     private double[] proPointInitTimes;
 
+    public AntiSaccade() {
+    }
+
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(LOG_TAG, "-------");
@@ -86,6 +93,14 @@ public class AntiSaccade extends AppCompatActivity {
         Intent intent = getIntent();
         participant = intent.getStringExtra(saccadeInstructions.EXTRA_MESSAGE);
 
+        //Retrieve number of trials from settings
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String testStop = sharedPref.getString("saccade_trials", "10");
+        TEST_STOP = Integer.parseInt(testStop);
+        //displayToast("Number of trials: " +testStop);
+
+        movementTime = new double[TEST_STOP]; //holds all times
+        initiationTime = new double[TEST_STOP];
         //Permissions
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             Log.d(LOG_TAG, "Permission is granted");
@@ -228,7 +243,6 @@ public class AntiSaccade extends AppCompatActivity {
         avgTotalTime[completedTests] = avgInitiationTime[completedTests] + avgMovementTime[completedTests];
         completedTests++;
         correctAnswers = 0;
-        mShowCount.setText(Integer.toString(correctAnswers) + "/" + TEST_STOP);
         startSecondTest();
     }
 
@@ -363,10 +377,6 @@ public class AntiSaccade extends AppCompatActivity {
         endTime = System.nanoTime();
     }
 
-    //Return random boolean
-    public boolean randomBoolean() {
-        return Math.random() < 0.5;
-    }
 
     //Function: nanotoSeconds
     //Description: Converts two nanosecond values and returns the difference in seconds

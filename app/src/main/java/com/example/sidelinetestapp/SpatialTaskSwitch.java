@@ -3,9 +3,11 @@ package com.example.sidelinetestapp;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
 import android.media.Image;
 import android.os.Build;
@@ -25,8 +27,8 @@ import java.util.Date;
 public class SpatialTaskSwitch extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private static final int SIMPLE_COND_LIMIT = 6; //Should be 80 to match paper's method
-    private static final int TRIAL_LIMIT = 14; //Should be SIMPLE_COND_LIMIT + 160 = 240
+    private static int SIMPLE_COND_LIMIT; //Should be 80 to match paper's method
+    private static int TRIAL_LIMIT; //Should be SIMPLE_COND_LIMIT + 160 = 240
 
     private Button leftClick;
     private Button rightClick;
@@ -42,11 +44,11 @@ public class SpatialTaskSwitch extends AppCompatActivity {
     private long startTime;
     private long endTime;
 
-    private double[] congruentTime = new double[TRIAL_LIMIT];
-    private double[] incongruentTime = new double[TRIAL_LIMIT];
-    private double[] simpleTime = new double[TRIAL_LIMIT];
-    private double[] stayTime = new double[TRIAL_LIMIT];
-    private double[] switchTime = new double[TRIAL_LIMIT];
+    private double[] congruentTime;
+    private double[] incongruentTime;
+    private double[] simpleTime;
+    private double[] stayTime;
+    private double[] switchTime;
 
     private int correctAnswers;
     private int incorrectAnswers;
@@ -96,6 +98,17 @@ public class SpatialTaskSwitch extends AppCompatActivity {
         divider = (ImageView) findViewById(R.id.divider);
         Log.d(LOG_TAG, "Started Spatial Activity");
         congruent = true;
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String simpleTrials = sharedPref.getString("simple_trial_number", "80");
+        String totalTrials = sharedPref.getString("total_trial_number", "260");
+        SIMPLE_COND_LIMIT = Integer.parseInt(simpleTrials);
+        TRIAL_LIMIT = Integer.parseInt(totalTrials);
+        congruentTime = new double[TRIAL_LIMIT];
+        incongruentTime = new double[TRIAL_LIMIT];
+        simpleTime = new double[TRIAL_LIMIT];
+        stayTime = new double[TRIAL_LIMIT];
+        switchTime = new double[TRIAL_LIMIT];
     }
 
 

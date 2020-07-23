@@ -24,6 +24,7 @@
     <string name="start_test">Start Test</string>
     <string name="introduction">Introduction</string>
 
+    <!-- Saccade Strings -->
     <string name="SaccadeIntroductionText">The following test contains two tasks: Pro Point and Anti Point tests. The two tasks should take around 1 minute each. The following steps will explain how to complete the tests.</string>
     <string name="Step1SaccadeHeader">Step 1</string>
     <string name="Step1Saccade">To start the Pro Point test, press and hold the middle circle.</string>
@@ -36,6 +37,7 @@
     <string name="Step5SaccadeHeader">Step 5</string>
     <string name="Step5Saccade">Touch the square opposite to the solid square. Always touch the square to which the arrow is pointing.</string>
 
+    <!-- Task Switching Strings -->
     <string name="SwitchingIntroductionText">The following test contains two tasks: Numeric and Spatial tests. The two tasks should take around TBD minutes each. In each task you will have to press a button based on what appears on the screen. The following steps will explain how to complete the tests.</string>
     <string name="Step1SwitchingHeader">Numeric Test Step 1</string>
     <string name="Step1Switching">During the Numeric test, a random number will appear on the screen. During the first portion of this test, the only active buttons are the \'4\' and \'7\'. If the number that appears on the screen is greater than 5, press the \'7\' button. If it is less than 5, press the \'4\' button.</string>
@@ -57,5 +59,7 @@
     <string name="start">Start</string>
     <string name="primaryInputMinus">-</string>
     <string name="primaryInput2Plus">+</string>
-    />
+    <string name="title_activity_settings">Settings</string>
+
+
 </resources>

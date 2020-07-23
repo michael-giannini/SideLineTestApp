@@ -1,0 +1,25 @@
+<resources>
+    <!-- Switching Preference -->
+    <string-array name="saccade_trials">
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>48</item>
+    </string-array>
+
+    <!-- Switching Preference -->
+    <string-array name="simple_trials">
+        <item>10</item>
+        <item>20</item>
+        <item>40</item>
+        <item>80</item>
+    </string-array>
+
+    <string-array name="total_trials">
+        <item>20</item>
+        <item>60</item>
+        <item>180</item>
+        <item>240</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,39 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="Anti-Saccade Test Settings">
+
+        <ListPreference
+            app:defaultValue="48"
+            app:entries="@array/saccade_trials"
+            app:entryValues="@array/saccade_trials"
+            app:key="saccade_trials"
+            app:title="Number of Trials for Each Section"
+            app:summary="%s" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Task-Switch Test Settings">
+
+
+        <ListPreference
+            android:defaultValue="20"
+            android:entries="@array/simple_trials"
+            android:entryValues="@array/simple_trials"
+            android:key="simple_trial_number"
+            android:summary="%s"
+            android:title="Number of Simple Trials" />
+
+        <ListPreference
+            android:defaultValue="60"
+            android:entries="@array/total_trials"
+            android:entryValues="@array/total_trials"
+            android:key="total_trial_number"
+            android:summary="%s"
+            android:title="Number of Total Trials" />r
+
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

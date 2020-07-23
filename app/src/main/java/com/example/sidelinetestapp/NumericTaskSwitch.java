@@ -3,10 +3,12 @@ package com.example.sidelinetestapp;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,8 +32,8 @@ public class NumericTaskSwitch extends AppCompatActivity {
     public static final String EXTRA_MESSAGE =
             "com.example.android.sidelinetestapp.extra.MESSAGE";
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
-    private static final int SIMPLE_COND_LIMIT = 6; //Should be 80 to match paper's method
-    private static final int TRIAL_LIMIT = 14; //Should be SIMPLE_COND_LIMIT + 160 = 240
+    private static int SIMPLE_COND_LIMIT = 6; //Should be 80 to match paper's method
+    private static int TRIAL_LIMIT = 14; //Should be SIMPLE_COND_LIMIT + 160 = 240
 
 
     private TextView taskSwitchRandomNumber;
@@ -51,11 +53,11 @@ public class NumericTaskSwitch extends AppCompatActivity {
     private int stayIndex;
     private int switchIndex;
 
-    private double[] magnitudeTime = new double[TRIAL_LIMIT];
-    private double[] parityTime = new double[TRIAL_LIMIT];
-    private double[] simpleTime = new double[TRIAL_LIMIT];
-    private double[] stayTime = new double[TRIAL_LIMIT];
-    private double[] switchTime = new double[TRIAL_LIMIT];
+    private double[] magnitudeTime;
+    private double[] parityTime;
+    private double[] simpleTime;
+    private double[] stayTime;
+    private double[] switchTime;
 
     private double meanMagTime;
     private double meanParityTime;
@@ -93,6 +95,17 @@ public class NumericTaskSwitch extends AppCompatActivity {
         leftClickMinus = (Button) findViewById(R.id.taskSwitchLeftButtonMinus);
         rightClickPlus = (Button) findViewById(R.id.taskSwitchRightButtonPlus);
         magnitudeCondition = true;
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String simpleTrials = sharedPref.getString("simple_trial_number", "80");
+        String totalTrials = sharedPref.getString("total_trial_number", "260");
+        SIMPLE_COND_LIMIT = Integer.parseInt(simpleTrials);
+        TRIAL_LIMIT = Integer.parseInt(totalTrials);
+        magnitudeTime = new double[TRIAL_LIMIT];
+        parityTime = new double[TRIAL_LIMIT];
+        simpleTime = new double[TRIAL_LIMIT];
+        stayTime = new double[TRIAL_LIMIT];
+        switchTime = new double[TRIAL_LIMIT];
     }
 
     //Function: startTest
@@ -202,7 +215,9 @@ public class NumericTaskSwitch extends AppCompatActivity {
     private void displayDialogue() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Test Complete");
-        builder.setMessage("Switching to Spatial Test");
+        builder.setMessage("Switching to Spatial Test. \n\nRemember, when the square is on the top " +
+                "portion of the screen, press the '7' or '+' button, if it is on the " +
+                "bottom portion of the screen, press the '4' or '-' button.");
         builder.setPositiveButton(
                 "Ok",
                 new DialogInterface.OnClickListener() {
