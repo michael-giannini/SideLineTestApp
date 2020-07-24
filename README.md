@@ -1,5 +1,5 @@
 ﻿
-# SideLine Test App ReadMe
+# SideLine Test App: User Manual
 
 The SideLine Neurological Test App is designed to administer a battery of tests to athletes to evaluate cognitive effects of sub-concussive and concussive injuries. The tests within the app are designed to be given to athletes before and after activity or injury. The test results of an athlete can be compared before and after injury to evaluate if any cognitive deficiencies have occurred due to the injury.  
 
@@ -65,12 +65,15 @@ The file will contain the participant's name, date and time the test was complet
 
 * **Switch Cost** - Calculated as the proportional difference in reaction times between simple blocks of trails and ‘switch’ trials (i.e. trials in which the subject switched from responding in one mode to the other) during the switch block of trials
 
-## Deployment
+## Version Tracking
 
-Add additional notes about how to deploy this on a live system
+As the app reaches milestones, branches shall be created that contain stable and complete builds. The description of these releases are below.
+* **v0.1** - Initial release of the app. This version contains functional Anti-Saccade and Task Switching tests. This version contains settings that allow the user to modify the number of trials for each test.
 
-## Built With
+# SideLine Test App: Development Guide
 
-* Android Studio
+This section of the Read Me will describe the the code architecture and should be read before making changes or additions to the app. 
+
+## Development Environment
 
 
