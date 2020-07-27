@@ -6,9 +6,6 @@ import android.os.Bundle;
 
 public class testSettings extends AppCompatActivity {
 
-    public static final String
-            KEY_PREF_EXAMPLE_SWITCH = "saccade_trials";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

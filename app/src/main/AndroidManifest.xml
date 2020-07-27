@@ -13,16 +13,19 @@
         android:roundIcon="@mipmap/simpl_launch_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".view.SettingsLogin"
+            android:label="Settings Login"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".testSettings"
             android:label="Settings"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".TaskSwitchInstructions"
             android:label="Task Switch Instructions"
             android:parentActivityName=".Main2Activity" />
-
         <activity
             android:name=".SpatialTaskSwitch"
             android:label="Task Switching Test"
@@ -32,7 +35,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sidelinetestapp.SpatialTaskSwitch" />
         </activity>
-
         <activity
             android:name=".saccadeInstructions"
             android:label="Saccade Instructions"
