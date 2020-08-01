@@ -18,8 +18,10 @@ public class LoginViewModel extends BaseObservable {
     public static final int OPEN_SETTINGS = 123;
 
     private SettingsModel pinModel;
+
     @Bindable
     private int messageID;
+
     @Bindable
     private String toastMessage = null;
 

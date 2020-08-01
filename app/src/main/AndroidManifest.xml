@@ -14,18 +14,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
         <activity
             android:name=".view.SettingsLogin"
             android:label="Settings Login"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".standalone.MainActivity" />
         <activity
-            android:name=".testSettings"
+            android:name=".view.AntiSaccadeView"
+            android:label="AntiSaccade View"
+            android:parentActivityName=".standalone.MainActivity" />
+        <activity
+            android:name=".standalone.testSettings"
             android:label="Settings"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".standalone.MainActivity" />
         <activity
-            android:name=".TaskSwitchInstructions"
+            android:name=".standalone.TaskSwitchInstructions"
             android:label="Task Switch Instructions"
-            android:parentActivityName=".Main2Activity" />
+            android:parentActivityName=".standalone.Main2Activity" />
         <activity
             android:name=".SpatialTaskSwitch"
             android:label="Task Switching Test"
@@ -36,28 +41,19 @@
                 android:value="com.example.sidelinetestapp.SpatialTaskSwitch" />
         </activity>
         <activity
-            android:name=".saccadeInstructions"
+            android:name=".standalone.saccadeInstructions"
             android:label="Saccade Instructions"
-            android:parentActivityName=".Main2Activity"
+            android:parentActivityName=".standalone.Main2Activity"
             android:screenOrientation="sensorPortrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sidelinetestapp.saccadeInstructions" />
+                android:value="com.example.sidelinetestapp.standalone.saccadeInstructions" />
         </activity>
-        <activity
-            android:name=".AntiSaccade"
-            android:label="Anti Saccade Test"
-            android:parentActivityName=".saccadeInstructions"
-            android:requestLegacyExternalStorage="true"
-            android:screenOrientation="sensorPortrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sidelinetestapp.AntiSaccade" />
-        </activity>
+
         <activity
             android:name=".NumericTaskSwitch"
             android:label="Task Switching Test"
-            android:parentActivityName=".TaskSwitchInstructions"
+            android:parentActivityName=".standalone.TaskSwitchInstructions"
             android:requestLegacyExternalStorage="true"
             android:screenOrientation="sensorPortrait">
             <meta-data
@@ -65,16 +61,16 @@
                 android:value="com.example.sidelinetestapp.NumericTaskSwitch" />
         </activity>
         <activity
-            android:name=".Main2Activity"
+            android:name=".standalone.Main2Activity"
             android:label="Participant Information"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".standalone.MainActivity"
             android:screenOrientation="sensorPortrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sidelinetestapp.Main2Activity" />
+                android:value="com.example.sidelinetestapp.standalone.Main2Activity" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".standalone.MainActivity"
             android:label="Sideline Neurological Test App"
             android:screenOrientation="sensorPortrait">
             <intent-filter>

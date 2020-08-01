@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.sidelinetestapp.R;
-import com.example.sidelinetestapp.testSettings;
+import com.example.sidelinetestapp.standalone.testSettings;
 import com.example.sidelinetestapp.databinding.ActivitySettingsLoginBinding;
 import com.example.sidelinetestapp.viewmodel.LoginViewModel;
 

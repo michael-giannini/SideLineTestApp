@@ -1,4 +1,4 @@
-package com.example.sidelinetestapp;
+package com.example.sidelinetestapp.standalone;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import com.example.sidelinetestapp.R;
+import com.example.sidelinetestapp.standalone.MainActivity;
+import com.example.sidelinetestapp.standalone.TaskSwitchInstructions;
+import com.example.sidelinetestapp.standalone.saccadeInstructions;
 
 public class Main2Activity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -28,10 +33,7 @@ public class Main2Activity extends AppCompatActivity {
     //Launch Anti-Saccade Test
     public void launchAntiSaccadeTest(View view) {
         String participantID = mIDEditText.getText().toString();
-        if (participantID.equals("")) {
-            displayNameAlert();
-            return;
-        }
+        if (checkEmptyText(participantID)) return;
         Intent intent = new Intent(this, saccadeInstructions.class);
         intent.putExtra(EXTRA_MESSAGE, participantID);
         startActivity(intent);
@@ -40,15 +42,21 @@ public class Main2Activity extends AppCompatActivity {
     //Launch Task Switching Test
     public void launchTaskSwitchTest(View view) {
         String participantID = mIDEditText.getText().toString();
-        if (participantID.equals("")) {
-            displayNameAlert();
-            return;
-        }
+        if (checkEmptyText(participantID)) return;
         Intent intent = new Intent(this, TaskSwitchInstructions.class);
         intent.putExtra(EXTRA_MESSAGE, participantID);
         startActivity(intent);
     }
 
+    //Check if the entry text is empty
+    private boolean checkEmptyText(String participantID) {
+        if (participantID.equals("")) {
+            displayNameAlert();
+            return true;
+        } else return false;
+    }
+
+    //Display a popup if the entry text is empty
     private void displayNameAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("No Name Entered");

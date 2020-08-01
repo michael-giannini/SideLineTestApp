@@ -1,10 +1,13 @@
-package com.example.sidelinetestapp;
+package com.example.sidelinetestapp.standalone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.sidelinetestapp.R;
+import com.example.sidelinetestapp.view.AntiSaccadeView;
 
 public class saccadeInstructions extends AppCompatActivity {
     private String participant;
@@ -20,7 +23,7 @@ public class saccadeInstructions extends AppCompatActivity {
     }
 
     public void launchAntiSaccadeTest(View view) {
-        Intent intent = new Intent(this, AntiSaccade.class);
+        Intent intent = new Intent(this, AntiSaccadeView.class);
         intent.putExtra(EXTRA_MESSAGE, participant);
         startActivity(intent);
     }

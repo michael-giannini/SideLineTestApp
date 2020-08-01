@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".saccadeInstructions">
+    tools:context=".standalone.saccadeInstructions">
 
     <TextView
         android:id="@+id/article_heading"

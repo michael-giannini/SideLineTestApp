@@ -1,4 +1,4 @@
-package com.example.sidelinetestapp;
+package com.example.sidelinetestapp.standalone;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.sidelinetestapp.R;
 import com.example.sidelinetestapp.view.SettingsLogin;
 
 public class MainActivity extends AppCompatActivity {

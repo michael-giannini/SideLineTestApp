@@ -19,13 +19,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.shape.InterpolateOnScrollPositionChangeHelper;
-import com.google.android.material.shape.TriangleEdgeTreatment;
+import com.example.sidelinetestapp.standalone.MainActivity;
+import com.example.sidelinetestapp.standalone.TaskSwitchInstructions;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public class NumericTaskSwitch extends AppCompatActivity {
 

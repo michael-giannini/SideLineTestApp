@@ -1,10 +1,13 @@
-package com.example.sidelinetestapp;
+package com.example.sidelinetestapp.standalone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.sidelinetestapp.NumericTaskSwitch;
+import com.example.sidelinetestapp.R;
 
 public class TaskSwitchInstructions extends AppCompatActivity {
     private String participant;

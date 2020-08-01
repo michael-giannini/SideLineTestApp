@@ -1,4 +1,4 @@
-package com.example.sidelinetestapp;
+package com.example.sidelinetestapp.standalone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
