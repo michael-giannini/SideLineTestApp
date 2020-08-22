@@ -6,9 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.sidelinetestapp.NumericTaskSwitch;
+//import com.example.sidelinetestapp.NumericTaskSwitch;
 import com.example.sidelinetestapp.R;
+import com.example.sidelinetestapp.view.NumericTaskSwitchView;
 
+/*
+Class:		TaskSwitchInstructions
+Purpose:    This class contains displays the instructions for the task switch test.
+*/
 public class TaskSwitchInstructions extends AppCompatActivity {
     private String participant;
     public static final String EXTRA_MESSAGE =
@@ -22,8 +27,9 @@ public class TaskSwitchInstructions extends AppCompatActivity {
         participant = intent.getStringExtra(Main2Activity.EXTRA_MESSAGE);
     }
 
+    //Launch task switch test
     public void launchTaskSwitchingTest(View view) {
-        Intent intent = new Intent(this, NumericTaskSwitch.class);
+        Intent intent = new Intent(this, NumericTaskSwitchView.class);
         intent.putExtra(EXTRA_MESSAGE, participant);
         startActivity(intent);
     }

@@ -168,6 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
                 android:text="@string/start_test"
                 android:onClick="launchAntiSaccadeTest"
                 android:textSize="@dimen/phone_head1_text" />

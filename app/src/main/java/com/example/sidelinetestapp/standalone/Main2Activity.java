@@ -15,8 +15,13 @@ import com.example.sidelinetestapp.standalone.MainActivity;
 import com.example.sidelinetestapp.standalone.TaskSwitchInstructions;
 import com.example.sidelinetestapp.standalone.saccadeInstructions;
 
+/*
+Class:		Main2Activity
+Purpose:    This class opens an the appropriate test based on the button the user presses.
+            When a button is pressed, the class checks to see if a participant ID has been entered.
+*/
 public class Main2Activity extends AppCompatActivity {
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private static final String LOG_TAG = Main2Activity.class.getSimpleName();
     public static final String EXTRA_MESSAGE =
             "com.example.android.sidelinetestapp.extra.MESSAGE";
     private EditText mIDEditText;

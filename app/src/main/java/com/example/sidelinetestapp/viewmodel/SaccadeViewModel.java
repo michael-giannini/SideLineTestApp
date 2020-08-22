@@ -8,16 +8,32 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.sidelinetestapp.model.AntiSaccadeModel;
+import com.example.sidelinetestapp.standalone.Utility;
 
-
+/*
+Class:		SaccadeViewModel
+Purpose:	Act as a bridge between the AntiSaccadeModel and AntiSaccadeView classes. Responsible
+            for conducting the logic for the test and passing data to the model.
+*/
 public class SaccadeViewModel extends ViewModel {
 
     private static final String LOG_TAG = SaccadeViewModel.class.getSimpleName();
 
+    //Instantiate the model for the test
+    private static AntiSaccadeModel testModel;
+
+    //Create live data that the view will observe
     private MutableLiveData<Integer> passingTarget;
     private MutableLiveData<Integer> liveArrowTarget;
     private MutableLiveData<String> displayString;
 
+    private static long startTime;
+    private static long endTime;
+    private int correctTarget; //indicates the correct target
+    private static boolean activeTarget; //indicates if there is an active target waiting to be pressed
+    private boolean AntiPoint; //Indicates if it is a Pro-Point test or Anti-Point
+
+    //Create getters for the observer(view) to use
     public MutableLiveData<Integer> getTarget() {
         Log.d(LOG_TAG, "Got pass target.");
         if (passingTarget == null) {
@@ -48,29 +64,19 @@ public class SaccadeViewModel extends ViewModel {
         return displayString;
     }
 
-    private static long startTime;
-    private static long endTime;
-    private int correctTarget; //indicates the correct target
-    private static boolean activeTarget; //indicates if there is an active target waiting to be pressed
-    private boolean AntiPoint; //Indicates if it is a Pro-Point test or Anti-Point
-
-    private static AntiSaccadeModel testModel;
-
+    //On start, send elapsed start time to model
     public SaccadeViewModel() {
         testModel = new AntiSaccadeModel(System.nanoTime());
     }
 
-    public void setData(String participantID, int testLimit) {
+    //Pass shared preferences to model
+    public void setData(String participantID, int testlimit) {
         testModel.participant = participantID;
-        testModel.TEST_STOP = testLimit;
+        testModel.TEST_STOP = testlimit;
     }
 
-    public void onClick() {
-        startAntiSaccadeTest();
-    }
-
-    //Execute when long click on start circle happens
-    private void startAntiSaccadeTest() {
+    //Execute when long press on circle occurs
+    public void startAntiSaccadeTest() {
         Log.d(LOG_TAG, "Starting trial");
         if (!activeTarget) {
             //choose a random square to become the target
@@ -105,12 +111,13 @@ public class SaccadeViewModel extends ViewModel {
         }
     }
 
+    //Execute when finger lifts off middle circle
     public void fingerUp() {
         if (activeTarget) {
             Log.d(LOG_TAG, "Action up");
             //Get timestamp for initiation time
             endTime = System.nanoTime();
-            testModel.initiationTime[testModel.correctAnswers] = nanotoSeconds(startTime, endTime);
+            testModel.initiationTime[testModel.correctAnswers] = Utility.nanotoSeconds(startTime, endTime);
             //Start new time for movement time
             startTime = System.nanoTime();
         }
@@ -120,18 +127,16 @@ public class SaccadeViewModel extends ViewModel {
     //Description: When a square is touched, determine if it is the correct square. If it is the
     //correct square, record times
     @SuppressLint("SetTextI18n")
-
     public void targetTouched(View view) {
         //Determine if there is an active target
         if (activeTarget) {
             //Read which square was touched
             String clickedTarget = view.getTag().toString();
-
             //Determine if correct square was touched
             if (clickedTarget.equals(Integer.toString(correctTarget))) {
                 Log.d(LOG_TAG, "Correct square.");
                 endTime = System.nanoTime();
-                testModel.movementTime[testModel.correctAnswers] = nanotoSeconds(startTime, endTime);
+                testModel.movementTime[testModel.correctAnswers] = Utility.nanotoSeconds(startTime, endTime);
                 resetTargets();
                 testModel.correctAnswers++;
                 //Start 2nd half of Anti-Saccade test
@@ -152,7 +157,6 @@ public class SaccadeViewModel extends ViewModel {
         activeTarget = false;
     }
 
-
     @SuppressLint("SetTextI18n")
     private void concludeTest() {
         testModel.concludeTest();
@@ -163,14 +167,6 @@ public class SaccadeViewModel extends ViewModel {
         } else {
             displayString.postValue("End Test");
         }
-    }
-
-    //Function: nanotoSeconds
-    //Description: Converts two nanosecond values and returns the difference in seconds
-    private static double nanotoSeconds(long startTime, long endTime) {
-        double timeResult = (double) (endTime - startTime) / 1000000000;
-        timeResult = Math.floor(timeResult * 1000) / 1000;
-        return timeResult;
     }
 
 }

@@ -28,6 +28,10 @@ import com.example.sidelinetestapp.standalone.MainActivity;
 import com.example.sidelinetestapp.standalone.saccadeInstructions;
 import com.example.sidelinetestapp.viewmodel.SaccadeViewModel;
 
+/*
+Class:		AntiSaccadeView
+Purpose:    This class contains the UI elements of the anti saccade test.
+*/
 public class AntiSaccadeView extends AppCompatActivity {
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
@@ -42,26 +46,17 @@ public class AntiSaccadeView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anti_saccade);
+
+        //Retrieve participant ID
         Intent intent = getIntent();
         String participant = intent.getStringExtra(saccadeInstructions.EXTRA_MESSAGE);
-        ImageView mStartCircle = findViewById(R.id.startCircle);
 
-        //Permissions
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            Log.d(LOG_TAG, "Permission is granted");
-        } else {
-            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        }
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            Log.d(LOG_TAG, "Permission is granted");
-        } else {
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-        }
+        //Use custom viewModel for the AntiSaccade Test
+        mViewModel = new ViewModelProvider(this).get(SaccadeViewModel.class);
 
-        //Retrieve number of trials from settings
+        //Retrieve number of trials from shared preferences
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String testStop = sharedPref.getString("saccade_trials", "10");
-        int TEST_STOP = Integer.parseInt(testStop);
 
         //Assign each image view to its array
         for (int i = 0; i < 4; i++) {
@@ -70,8 +65,9 @@ public class AntiSaccadeView extends AppCompatActivity {
             target[i] = findViewById(res);
             arrow[i] = findViewById(arrowRes);
         }
+        ImageView mStartCircle = findViewById(R.id.startCircle);
 
-        mViewModel = new ViewModelProvider(this).get(SaccadeViewModel.class);
+        //Execute this function when the target live data variable is changed in the view model
         final Observer<Integer> resultObserver = new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable final Integer targ) {
@@ -87,6 +83,7 @@ public class AntiSaccadeView extends AppCompatActivity {
             }
         };
 
+        //Execute this function when the arrow live data variable is changed in the view model
         final Observer<Integer> arrowObserver = new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable final Integer targ) {
@@ -97,6 +94,7 @@ public class AntiSaccadeView extends AppCompatActivity {
             }
         };
 
+        //Execute this function when the message string live data variable is changed in the view model
         final Observer<String> stringObserver = new Observer<String>() {
             @Override
             public void onChanged(@Nullable final String msg) {
@@ -115,11 +113,15 @@ public class AntiSaccadeView extends AppCompatActivity {
             }
         };
 
+        //State which variables inside the view model should be observed
         mViewModel.getTarget().observe(this, resultObserver);
         mViewModel.getArrow().observe(this, arrowObserver);
         mViewModel.getDisplayString().observe(this, stringObserver);
+
+        //Send data participant and shared preferences to the view model
         mViewModel.setData(participant, Integer.parseInt(testStop));
 
+        //Assign listeners to buttons
         mStartCircle.setOnLongClickListener(startCircleLongClick);
         mStartCircle.setOnTouchListener(actionUp);
 
@@ -130,11 +132,12 @@ public class AntiSaccadeView extends AppCompatActivity {
         @Override
         public boolean onLongClick(View v) {
             Log.d(LOG_TAG, "Long Click Occurred.");
-            mViewModel.onClick();
+            mViewModel.startAntiSaccadeTest();
             return true;
         }
     };
 
+    //Execute when finger lifts off middle circle
     private final View.OnTouchListener actionUp = new View.OnTouchListener() {
         @SuppressLint({"ClickableViewAccessibility", "SetTextI18n"})
         @Override
@@ -146,8 +149,15 @@ public class AntiSaccadeView extends AppCompatActivity {
         }
     };
 
+    //Execute view model method when a target is touched
+    public void targetTouched(View view) {
+        mViewModel.targetTouched(view);
+    }
+
+    //Display a pop-up when the anti point test starts
     public void displayNewTestAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
         builder.setTitle("ProPoint Test Complete");
         builder.setMessage("ProPoint tests are complete, AntiPoint tests are about to begin.");
         builder.setPositiveButton(
@@ -161,8 +171,10 @@ public class AntiSaccadeView extends AppCompatActivity {
         AntiPointTest.show();
     }
 
+    //Display a pop up when the test is over
     private void displayEndTestAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
         builder.setTitle("Test Complete");
         builder.setMessage("Thank you for completing the tests, you will now be returned to the main menu.");
         builder.setPositiveButton(
@@ -177,21 +189,17 @@ public class AntiSaccadeView extends AppCompatActivity {
         AntiPointTest.show();
     }
 
+    //Direct user to the main activity
     private void endTest() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+    //Display a toast
     public void displayToast(String message) {
         if (message != null)
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    public void startSaccadeTest(View view) {
-        mViewModel.onClick();
-    }
 
-    public void targetTouched(View view) {
-        mViewModel.targetTouched(view);
-    }
 }

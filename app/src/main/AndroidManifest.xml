@@ -13,33 +13,26 @@
         android:roundIcon="@mipmap/simpl_launch_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
         <activity
             android:name=".view.SettingsLogin"
             android:label="Settings Login"
-            android:parentActivityName=".standalone.MainActivity" />
+            android:parentActivityName=".standalone.MainActivity"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".view.AntiSaccadeView"
             android:label="AntiSaccade View"
-            android:parentActivityName=".standalone.MainActivity" />
+            android:parentActivityName=".standalone.MainActivity"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".standalone.testSettings"
             android:label="Settings"
-            android:parentActivityName=".standalone.MainActivity" />
+            android:parentActivityName=".standalone.MainActivity"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".standalone.TaskSwitchInstructions"
             android:label="Task Switch Instructions"
-            android:parentActivityName=".standalone.Main2Activity" />
-        <activity
-            android:name=".SpatialTaskSwitch"
-            android:label="Task Switching Test"
-            android:requestLegacyExternalStorage="true"
-            android:screenOrientation="sensorPortrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sidelinetestapp.SpatialTaskSwitch" />
-        </activity>
+            android:parentActivityName=".standalone.Main2Activity"
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".standalone.saccadeInstructions"
             android:label="Saccade Instructions"
@@ -50,16 +43,6 @@
                 android:value="com.example.sidelinetestapp.standalone.saccadeInstructions" />
         </activity>
 
-        <activity
-            android:name=".NumericTaskSwitch"
-            android:label="Task Switching Test"
-            android:parentActivityName=".standalone.TaskSwitchInstructions"
-            android:requestLegacyExternalStorage="true"
-            android:screenOrientation="sensorPortrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.sidelinetestapp.NumericTaskSwitch" />
-        </activity>
         <activity
             android:name=".standalone.Main2Activity"
             android:label="Participant Information"
@@ -79,6 +62,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".view.NumericTaskSwitchView"
+            android:label="Task Switching Test"
+            android:parentActivityName=".standalone.MainActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".view.SpatialTaskSwitchView"
+            android:label="Task Switching Test"
+            android:parentActivityName=".standalone.MainActivity"
+            android:screenOrientation="sensorPortrait" />
     </application>
 
 </manifest>

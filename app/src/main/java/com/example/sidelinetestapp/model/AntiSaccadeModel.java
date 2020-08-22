@@ -4,6 +4,7 @@ package com.example.sidelinetestapp.model;
 import android.util.Log;
 
 import com.example.sidelinetestapp.standalone.MainActivity;
+import com.example.sidelinetestapp.standalone.Utility;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,14 +13,15 @@ import java.util.Date;
 
 /*
 Class:		AntiSaccadeModel
-Purpose:
+Purpose:    This class contains the required data for the AntiSaccade test and is responsible for
+            outputting a .csv file at the conclusion of the test.
 */
 public class AntiSaccadeModel {
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
+    private static final String LOG_TAG = AntiSaccadeModel.class.getSimpleName();
 
     private SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy_kmm");
 
-    public int TEST_STOP; //According to the paper, this should be 48
+    public int TEST_STOP = 48; //According to the paper, this should be 48
 
     public String participant = "Unknown";
     private Date date = new Date();
@@ -41,10 +43,11 @@ public class AntiSaccadeModel {
     public int completedTests; //number of completed tasks
     public int correctAnswers; //number of correct answers
 
-
+    //Constructor. Elapsed start time is provided by the view model.
     public AntiSaccadeModel(long elapsedStartTime) {
         this.elapsedStartTime = elapsedStartTime;
     }
+
 
     //Function: concludeTest
     //Description: When a test is complete, calculate average times.
@@ -80,7 +83,7 @@ public class AntiSaccadeModel {
         StringBuilder data = new StringBuilder();
         data.append("Participant: ," + participant);
         data.append("\nDate and Time: ," + String.valueOf(date));
-        data.append("\nElapsed Time (s): ," + String.valueOf(nanotoSeconds(elapsedStartTime, elapsedEndTime)));
+        data.append("\nElapsed Time (s): ," + String.valueOf(Utility.nanotoSeconds(elapsedStartTime, elapsedEndTime)));
         data.append("\n ,Avg Initiation Time (s), Avg Movement Time (s), Average Total Time (s), Errors");
         data.append("\nProPoint," + String.valueOf(avgInitiationTime[0]) + ","
                 + String.valueOf(avgMovementTime[0]) + "," + String.valueOf(avgTotalTime[0]) + ","
@@ -124,22 +127,14 @@ public class AntiSaccadeModel {
         double avg;
         double sum = 0;
         int numCount = 0;
-        for (double i : array) {
+        for (double i : array)
             if (i > 0) {
                 sum += i;
                 numCount++;
             }
-        }
         avg = sum / numCount;
         avg = Math.floor(avg * 1000) / 1000;
         return avg;
     }
 
-    //Function: nanotoSeconds
-    //Description: Converts two nanosecond values and returns the difference in seconds
-    private double nanotoSeconds(long startTime, long endTime) {
-        double timeResult = (double) (endTime - startTime) / 1000000000;
-        timeResult = Math.floor(timeResult * 1000) / 1000;
-        return timeResult;
-    }
 }
