@@ -73,7 +73,7 @@ As the app reaches milestones, branches shall be created that contain stable and
 
 # SideLine Test App: Development Guide
 
-This section of the Read Me will describe the the code architecture and should be read before making changes or additions to the app. 
+This section of the Read Me will describe the the code architecture and should be read before making changes or additions to the app. For excellent tutorials on getting started with Android Studio, see this [page](https://developer.android.com/courses/fundamentals-training/toc-v2).
 
 ## Development Environment
 
@@ -148,7 +148,7 @@ In Android Studio, the .xml file for the setting is located at `res>xml>root pre
 
 If additional test are added to the app, they should be added in a manner similar to the existing tests and use the MVVM architecture. Each test should contain an instructions page that appears before the test begins. 
 
-To add your test to the app, after creating your code, create a `button` inside the `Main2Activity` class. Place this button below the existing buttons. Inside the `Main2Activity` code, create an intent that opens the new test.  The participant name should be included. An example is shown below:
+When adding your test to the app, create a `button` inside the `Main2Activity` class. Place this button below the existing buttons. Inside the `Main2Activity` code, create an intent that opens the new test.  The participant name should be included. An example is shown below:
 
 ```
 //Launch New Test  
@@ -161,6 +161,8 @@ public void launchNewTest(View view) {
 }
 ```
 
-When creating your new activities and tests, use the `Empty Activity` template for your View class, and simply create individual classes for the ViewModel and Model. 
+### Creating an Activity
+
+When creating your new activities and tests, use the `Empty Activity` template for your View class, and simply create individual classes for the ViewModel and Model. To use this template click File>New>Activity>Empty Template and ensure that 'Generate Layout File' is selected.
 
 Classes should be placed in the appropriate existing folders. Folders for the View, Model, and ViewModel exist, and all other classes should be placed in the standalone folder. Within the project, View, ViewModel, and Model folders have been created. When creating a new test, place each file in the respective folder. For other files, place in the `standalone` folder. 
