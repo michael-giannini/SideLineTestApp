@@ -69,6 +69,7 @@ The file will contain the participant's name, date and time the test was complet
 
 As the app reaches milestones, branches shall be created that contain stable and complete builds. The description of these releases are below.
 * **v0.1** - Initial release of the app. This version contains functional Anti-Saccade and Task Switching tests. This version contains settings that allow the user to modify the number of trials for each test.
+* **v1.0** - No functional changes to the app were made, but MVVM was implemented for all tests.  
 
 # SideLine Test App: Development Guide
 
@@ -76,4 +77,90 @@ This section of the Read Me will describe the the code architecture and should b
 
 ## Development Environment
 
+This app was created in Android Studio, and any changes to the app should also be made via Android Studio. To work on the app, download all files in the repository and open the project file in Android Studio. 
 
+## App Architecture
+
+The SideLine Test App uses the Model-View-ViewModel (MVVM) architecture with Live Data. See [this example](https://proandroiddev.com/mvvm-architecture-viewmodel-and-livedata-part-1-604f50cda1) for an overview and example of how this is implemented. MVVM is commonly used in industry and is the Google recommended architecture for Android development. This architecture satisfies the Separation of Concerns principle and allows the UI to be driven by a model. This section will provide a brief explanation of how the architecture applies to this app. 
+
+Another good resource to learn more about Live Data can be found [here](https://developer.android.com/topic/libraries/architecture/livedata).
+
+### MVVM Architecture
+Below are the key elements of the MVVM architecture. 
+
+* **Model** - Holds the data of the app. Only communicates with the ViewModel.
+* **View** - The UI of the app. These classes should only be concerned with UI elements that the user interacts with. The View observes the ViewModel.
+* **ViewModel** - The link between the View and the Model. Responsible for transferring data between the View and Model. The View Model does not know the View is listening to it (Data Binding) 
+
+In the project directory, the classes are located in their corresponding folder (model/view/viewmodel).
+
+### Live Data
+Live Data allows the ViewModel to pass information to observers, in this case, the View. As part of the architecture, the ViewModel is unaware of the objects which observe it. The View objects retrieve information from the ViewModel with the use of observers.
+
+Observers monitor a live data variable and execute some action when this variable changes. Below demonstrates how this is accomplished programmatically:
+
+In the ViewModel class, a live data variable, `display`,  is defined:
+```
+private MutableLiveData<String> display;
+``` 
+A getter is also required for this variable inside the ViewModel:
+
+```
+public MutableLiveData<String> getDisplay() {  
+    Log.d(LOG_TAG, "Got pass target.");  
+ if (display == null) {  
+        display = new MutableLiveData<String>();  
+  display.postValue("null");  
+  }  
+    return display;  
+}
+```
+
+This allows other codebases to observe this variable and execute a function when it changes. The below code accomplishes this and should be placed in a View. 
+
+```
+final Observer<String> dispObserver = new Observer<String>() {  
+    @Override  
+  public void onChanged(@Nullable final String msg) {  
+        Log.d(LOG_TAG, "Observed condition change.");  
+ if (msg.equals("End Test")) {  
+            endTestDialogue();  
+  }  
+    }  
+};
+``` 
+Note, we override the `onChanged()` method. It is this method that gets called whenever the variable is changed in the ViewModel class with the `.postValue()` method. 
+
+To complete the implementation, we must define the View variable that will observe the ViewModel. This is done by attaching the getter to the variable:
+
+```
+mViewModel.getDisplay().observe(this, dispObserver);
+```
+This implementation is used across all tests in the app and should be used for all future tests that are added. 
+
+### Settings
+
+The settings page can be accessed from the opening screen of the app. When opening the settings page, you are prompted to enter a password to login. The 4-digit key is `1234`. Accessing the page does not reveal any personal or secure information, it is only used to change the length of each test. The default values are 48 Saccade Trials, and 20 and 80 simple and total trials for the Task Switching tests, respectively.
+
+In Android Studio, the .xml file for the setting is located at `res>xml>root preferences`.
+
+### Adding Additional Tests
+
+If additional test are added to the app, they should be added in a manner similar to the existing tests and use the MVVM architecture. Each test should contain an instructions page that appears before the test begins. 
+
+To add your test to the app, after creating your code, create a `button` inside the `Main2Activity` class. Place this button below the existing buttons. Inside the `Main2Activity` code, create an intent that opens the new test.  The participant name should be included. An example is shown below:
+
+```
+//Launch New Test  
+public void launchNewTest(View view) {  
+    String participantID = mIDEditText.getText().toString();  
+ if (checkEmptyText(participantID)) return;  
+  Intent intent = new Intent(this, newTestInstructions.class);  
+  intent.putExtra(EXTRA_MESSAGE, participantID);  
+  startActivity(intent);  
+}
+```
+
+When creating your new activities and tests, use the `Empty Activity` template for your View class, and simply create individual classes for the ViewModel and Model. 
+
+Classes should be placed in the appropriate existing folders. Folders for the View, Model, and ViewModel exist, and all other classes should be placed in the standalone folder. Within the project, View, ViewModel, and Model folders have been created. When creating a new test, place each file in the respective folder. For other files, place in the `standalone` folder. 

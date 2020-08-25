@@ -12,6 +12,12 @@ import com.example.sidelinetestapp.model.SpatialTaskSwitchModel;
 import com.example.sidelinetestapp.standalone.MainActivity;
 import com.example.sidelinetestapp.standalone.Utility;
 
+/*
+Class:		SpatialTaskSwitchModel
+Author:     Michael Giannini
+Purpose:	Act as a bridge between the NumericTaskSwitch Model and NumericTaskSwitchView classes. Responsible
+            for conducting the logic for the test and passing data to the model.
+*/
 public class SpatialTaskSwitchViewModel extends ViewModel {
     private static final String LOG_TAG = SpatialTaskSwitchViewModel.class.getSimpleName();
 
@@ -98,20 +104,24 @@ public class SpatialTaskSwitchViewModel extends ViewModel {
         }, 100);
     }
 
+    //Determine if the correct button was clicked
     public void leftClick() {
         if (activeBottom) correctAnswer();
         else incorrectAnswer();
     }
 
+    //Determine if the correct button was clicked
     public void rightClick() {
         if (activeTop) correctAnswer();
         else incorrectAnswer();
     }
 
+    //Increment incorrect answers counter
     private void incorrectAnswer() {
         testModel.incorrectAnswers++;
     }
 
+    //Log time and determine if test should be switched
     private void correctAnswer() {
         logTime();
         testModel.correctAnswers++;
@@ -127,6 +137,7 @@ public class SpatialTaskSwitchViewModel extends ViewModel {
         displayRandomSquare();
     }
 
+    //Store recorded time in the appropriate array
     private void logTime() {
         long endTime = Utility.sysTime();
         //Store reaction time for simple trials
@@ -155,6 +166,7 @@ public class SpatialTaskSwitchViewModel extends ViewModel {
         }
     }
 
+    //Switch task
     private void taskSwitch() {
         Log.d(LOG_TAG, "Switching Task");
         if (congruent) {
@@ -166,6 +178,7 @@ public class SpatialTaskSwitchViewModel extends ViewModel {
         switchCount = 0;
     }
 
+    //record end time and trigger method in the model.
     private void concludeTest() {
         testModel.elapsedEndTime = Utility.sysTime();
         testModel.concludeTest();

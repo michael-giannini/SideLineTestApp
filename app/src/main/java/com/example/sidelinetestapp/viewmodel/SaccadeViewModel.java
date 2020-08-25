@@ -12,6 +12,7 @@ import com.example.sidelinetestapp.standalone.Utility;
 
 /*
 Class:		SaccadeViewModel
+Author:     Michael Giannini
 Purpose:	Act as a bridge between the AntiSaccadeModel and AntiSaccadeView classes. Responsible
             for conducting the logic for the test and passing data to the model.
 */
@@ -44,6 +45,7 @@ public class SaccadeViewModel extends ViewModel {
         return passingTarget;
     }
 
+    //Create getters for the live data
     public MutableLiveData<Integer> getArrow() {
         Log.d(LOG_TAG, "Got arrow target.");
         if (liveArrowTarget == null) {
@@ -157,6 +159,7 @@ public class SaccadeViewModel extends ViewModel {
         activeTarget = false;
     }
 
+    //Start a model method when the test is over
     @SuppressLint("SetTextI18n")
     private void concludeTest() {
         testModel.concludeTest();

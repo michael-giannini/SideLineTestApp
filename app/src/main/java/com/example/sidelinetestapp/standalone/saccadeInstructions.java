@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.sidelinetestapp.R;
@@ -14,12 +15,14 @@ Class:		saccadeInstructions
 Purpose:    This class contains displays the instructions for the anti-saccade test.
 */
 public class saccadeInstructions extends AppCompatActivity {
+    private static final String LOG_TAG = Main2Activity.class.getSimpleName();
     private String participant;
     public static final String EXTRA_MESSAGE =
             "com.example.android.sidelinetestapp.extra.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(LOG_TAG, "Opening Saccade Instructions");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saccade_instructions);
         Intent intent = getIntent();

@@ -23,9 +23,9 @@ import com.example.sidelinetestapp.standalone.TaskSwitchInstructions;
 import com.example.sidelinetestapp.viewmodel.NumericTaskSwitchViewModel;
 
 /*
-Class:		TaskSwitchViewModel
-Purpose:	Act as a bridge between the AntiSaccadeModel and AntiSaccadeView classes. Responsible
-            for conducting the logic for the test and passing data to the model.
+Class:		NumericTaskSwitchView
+Author:     Michael Giannini
+Purpose:	Contains all the UI components and UI interactions of this activity.
 */
 public class NumericTaskSwitchView extends AppCompatActivity {
 
@@ -42,16 +42,13 @@ public class NumericTaskSwitchView extends AppCompatActivity {
     private Button startButton;
     private String participant;
 
-    private static int SIMPLE_COND_LIMIT; //Should be 80 to match paper's method
-    private static int TRIAL_LIMIT; //Should be SIMPLE_COND_LIMIT + 160 = 240
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numeric_task_switch);
 
-        //Retrieve Partipcipant
+        //Retrieve Partipcipant from Main2Activity
         Intent intent = getIntent();
         participant = intent.getStringExtra(TaskSwitchInstructions.EXTRA_MESSAGE);
 
@@ -66,10 +63,12 @@ public class NumericTaskSwitchView extends AppCompatActivity {
         rightClickPlus = (Button) findViewById(R.id.taskSwitchRightButtonPlus);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String simpleTrials = sharedPref.getString("simple_trial_number", "80");
-        String totalTrials = sharedPref.getString("total_trial_number", "260");
-        SIMPLE_COND_LIMIT = Integer.parseInt(simpleTrials);
-        TRIAL_LIMIT = Integer.parseInt(totalTrials);
+        String simpleTrials = sharedPref.getString("simple_trial_number", "20");
+        String totalTrials = sharedPref.getString("total_trial_number", "60");
+        //Should be 80 to match paper's method
+        int SIMPLE_COND_LIMIT = Integer.parseInt(simpleTrials);
+        //Should be SIMPLE_COND_LIMIT + 160 = 240
+        int TRIAL_LIMIT = Integer.parseInt(totalTrials);
 
         //Execute this function when the arrow live data variable is changed in the view model
         final Observer<Integer> numObserver = new Observer<Integer>() {
@@ -121,6 +120,7 @@ public class NumericTaskSwitchView extends AppCompatActivity {
         mViewModel.setData(participant, SIMPLE_COND_LIMIT, TRIAL_LIMIT);
     }
 
+    //Display a pop-up when the test is over, then execute switchActivities()
     private void endTestDialogue() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Test Complete");
@@ -152,6 +152,8 @@ public class NumericTaskSwitchView extends AppCompatActivity {
         mViewModel.startElapsedTime();
     }
 
+    //Function: SwitchActivities
+    //Description: When Numeric task switch is complete, start SpatialTaskSwitch activity
     private void switchActivities() {
         Intent intent = new Intent(this, SpatialTaskSwitchView.class);
         intent.putExtra(EXTRA_MESSAGE, participant);
@@ -159,13 +161,13 @@ public class NumericTaskSwitchView extends AppCompatActivity {
     }
 
     //Function: leftButtonClick
-    //Description:
+    //Description: Start ViewModel logic
     public void leftButtonClick(View view) {
         mViewModel.leftButtonClick();
     }
 
     //Function: rightButtonClick
-    //Description:
+    //Description: Start ViewModel logic
     public void rightButtonClick(View view) {
         mViewModel.rightButtonClick();
     }

@@ -24,6 +24,11 @@ import com.example.sidelinetestapp.standalone.saccadeInstructions;
 import com.example.sidelinetestapp.viewmodel.NumericTaskSwitchViewModel;
 import com.example.sidelinetestapp.viewmodel.SpatialTaskSwitchViewModel;
 
+/*
+Class:		SpatialTaskSwitchView
+Author:     Michael Giannini
+Purpose:	Contains all the UI components of the activity and UI interactions
+*/
 public class SpatialTaskSwitchView extends AppCompatActivity {
     private static final String LOG_TAG = SpatialTaskSwitchView.class.getSimpleName();
 
@@ -35,7 +40,6 @@ public class SpatialTaskSwitchView extends AppCompatActivity {
     private ImageView topSquare;
     private ImageView bottomSquare;
     private ImageView divider;
-    private String participant;
 
     private SpatialTaskSwitchViewModel mViewModel;
 
@@ -57,11 +61,11 @@ public class SpatialTaskSwitchView extends AppCompatActivity {
         divider = (ImageView) findViewById(R.id.divider);
 
         Intent intent = getIntent();
-        participant = intent.getStringExtra(saccadeInstructions.EXTRA_MESSAGE);
+        String participant = intent.getStringExtra(saccadeInstructions.EXTRA_MESSAGE);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String simpleTrials = sharedPref.getString("simple_trial_number", "80");
-        String totalTrials = sharedPref.getString("total_trial_number", "260");
+        String simpleTrials = sharedPref.getString("simple_trial_number", "20");
+        String totalTrials = sharedPref.getString("total_trial_number", "60");
         int SIMPLE_COND_LIMIT = Integer.parseInt(simpleTrials);
         int TRIAL_LIMIT = Integer.parseInt(totalTrials);
 
@@ -69,6 +73,7 @@ public class SpatialTaskSwitchView extends AppCompatActivity {
         mViewModel = new ViewModelProvider(this).get(SpatialTaskSwitchViewModel.class);
         mViewModel.setData(participant, SIMPLE_COND_LIMIT, TRIAL_LIMIT);
 
+        //Define actions to be taken when observed variables change
         final Observer<String> squareObserver = new Observer<String>() {
             @Override
             public void onChanged(@Nullable final String square) {
@@ -117,6 +122,7 @@ public class SpatialTaskSwitchView extends AppCompatActivity {
         mViewModel.getDisplay().observe(this, dispObserver);
     }
 
+    //Commands to execute when test is started
     public void startSpatialTest(View view) {
         startButton.setVisibility(View.INVISIBLE);
         divider.setVisibility(View.VISIBLE);
@@ -127,17 +133,18 @@ public class SpatialTaskSwitchView extends AppCompatActivity {
     }
 
     //Function: leftButtonClick
-    //Description:
+    //Description: Start a viewModel function when left button is clicked
     public void leftButtonClick(View view) {
         mViewModel.leftClick();
     }
 
     //Function: rightButtonClick
-    //Description:
+    //Description: Start a viewModel function when right button is clicked
     public void rightButtonClick(View view) {
         mViewModel.rightClick();
     }
 
+    //Display a pop-up when the test has ended
     private void endTestDialogue() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Test Complete");
@@ -155,6 +162,7 @@ public class SpatialTaskSwitchView extends AppCompatActivity {
         endOfTestAlert.show();
     }
 
+    //open the main activity
     private void switchActivities() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

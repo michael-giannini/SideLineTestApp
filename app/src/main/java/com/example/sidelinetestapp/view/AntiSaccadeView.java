@@ -30,6 +30,7 @@ import com.example.sidelinetestapp.viewmodel.SaccadeViewModel;
 
 /*
 Class:		AntiSaccadeView
+Author:     Michael Giannini
 Purpose:    This class contains the UI elements of the anti saccade test.
 */
 public class AntiSaccadeView extends AppCompatActivity {

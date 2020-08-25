@@ -10,6 +10,13 @@ import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+/*
+Class:		SpatialTaskSwitchModel
+Author:     Michael Giannini
+Purpose:    This class contains the required data for the SpatialTaskSwitch test and is responsible for
+            outputting a .csv file at the conclusion of the test.
+*/
 public class SpatialTaskSwitchModel {
     private static final String LOG_TAG = SpatialTaskSwitchModel.class.getSimpleName();
     public final int trialLimit;
@@ -47,6 +54,8 @@ public class SpatialTaskSwitchModel {
         this.participant = part;
     }
 
+    //Function: concludeTest
+    //Description: When both tests have finished, calculate metrics and create output file.
     public void concludeTest() {
         calculateMeanTimes();
         calculateCosts();
@@ -54,11 +63,15 @@ public class SpatialTaskSwitchModel {
         writeToFile(output);
     }
 
+    //Function: calculateCosts
+    //Description: Calculate Costs of times
     private void calculateCosts() {
         globalCost = (meanStayTime - meanSimpleTime) / meanSimpleTime;
         switchCost = (meanSwitchTime - meanSimpleTime) / meanSimpleTime;
     }
 
+    //Function: calculateMeanTimes
+    //Description: Find average value of an array
     private void calculateMeanTimes() {
         meanConTime = arrayAverage(congruentTime);
         meanInconTime = arrayAverage(incongruentTime);
@@ -67,6 +80,8 @@ public class SpatialTaskSwitchModel {
         meanSwitchTime = arrayAverage(switchTime);
     }
 
+    //Function: writeToFile
+    //Description: Convert the passed array to a .csv file and save to /downloads folder of the device
     private void writeToFile(String data) {
         try {
             Log.d(LOG_TAG, "Trying to export.");
@@ -86,6 +101,8 @@ public class SpatialTaskSwitchModel {
         }
     }
 
+    //Function: generateResults
+    //Description: Generate csv string of results that will be saved to an output file.
     private String generateResults() {
         //generate data
         StringBuilder data = new StringBuilder();

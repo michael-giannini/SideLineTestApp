@@ -17,6 +17,7 @@ import com.example.sidelinetestapp.standalone.saccadeInstructions;
 
 /*
 Class:		Main2Activity
+Author:     Michael Giannini
 Purpose:    This class opens an the appropriate test based on the button the user presses.
             When a button is pressed, the class checks to see if a participant ID has been entered.
 */

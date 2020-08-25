@@ -14,8 +14,9 @@ import java.util.Date;
 
 /*
 Class:		AntiSaccadeModel
-Purpose:    This class contains the required data for the AntiSaccade test and is responsible for
-            outputting a .csv file at the conclusion of the test.
+Author:     Michael Giannini
+Purpose:    This class contains the required data for the Numeric Task Switch test and is
+            responsible for outputting a .csv file at the conclusion of the test.
 */
 public class NumericTaskSwitchModel {
 
@@ -56,6 +57,8 @@ public class NumericTaskSwitchModel {
         this.participant = part;
     }
 
+    //Function: concludeTest
+    //Description: When both tests have finished, calculate metrics and create output file.
     public void concludeTest() {
         calculateMeanTimes();
         calculateCosts();
@@ -64,6 +67,8 @@ public class NumericTaskSwitchModel {
         Log.d(LOG_TAG, "Ending Numeric Test, starting Spatial Activity.");
     }
 
+    //Function: calculateMeanTimesw
+    //Description: Find average value of an array
     private void calculateMeanTimes() {
         meanMagTime = arrayAverage(magnitudeTime);
         meanParityTime = arrayAverage(parityTime);
@@ -72,11 +77,15 @@ public class NumericTaskSwitchModel {
         meanSwitchTime = arrayAverage(switchTime);
     }
 
+    //Function: calculateCosts
+    //Description: Calculate Costs of times
     private void calculateCosts() {
         globalCost = (meanStayTime - meanSimpleTime) / meanSimpleTime;
         switchCost = (meanSwitchTime - meanSimpleTime) / meanSimpleTime;
     }
 
+    //Function: generateResults
+    //Description: Generate csv string of results that will be saved to an output file.
     private String generateResults() {
         //generate data
         StringBuilder data = new StringBuilder();
@@ -98,6 +107,8 @@ public class NumericTaskSwitchModel {
         return data.toString();
     }
 
+    //Function: writeToFile
+    //Description: Convert the passed array to a .csv file and save to /downloads folder of the device
     private void writeToFile(String data) {
         try {
             Log.d(LOG_TAG, "Trying to export.");

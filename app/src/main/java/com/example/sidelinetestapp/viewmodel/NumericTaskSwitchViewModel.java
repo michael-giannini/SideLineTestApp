@@ -12,6 +12,7 @@ import com.example.sidelinetestapp.standalone.Utility;
 
 /*
 Class:		TaskSwitchViewModel
+Author:     Michael Giannini
 Purpose:	Act as a bridge between the AntiSaccadeModel and AntiSaccadeView classes. Responsible
             for conducting the logic for the test and passing data to the model.
 */
@@ -67,10 +68,12 @@ public class NumericTaskSwitchViewModel extends ViewModel {
         return display;
     }
 
+    //Send Participant and shared preferences to the model
     public void setData(String participant, int simpleCondLimit, int trialLimit) {
         testModel = new NumericTaskSwitchModel(participant, simpleCondLimit, trialLimit);
     }
 
+    //Record starting time
     public void startElapsedTime() {
         testModel.elapsedStartTime = Utility.sysTime();
         magnitudeCondition = true;
@@ -94,6 +97,7 @@ public class NumericTaskSwitchViewModel extends ViewModel {
         }, 100);
     }
 
+    //Determine if the correct button was clicked
     public void leftButtonClick() {
         if (magnitudeCondition) {
             if (randNumber < 5) {
@@ -110,6 +114,7 @@ public class NumericTaskSwitchViewModel extends ViewModel {
         }
     }
 
+    //Determine if the correct button was clicked
     public void rightButtonClick() {
         if (magnitudeCondition) {
             if (randNumber > 5) {
@@ -151,7 +156,7 @@ public class NumericTaskSwitchViewModel extends ViewModel {
         generateRandomNumber();
     }
 
-
+    //Log the time in the appropriate array
     private void logTime() {
         long endTime = Utility.sysTime();
         //Store reaction time for simple trials
@@ -192,6 +197,7 @@ public class NumericTaskSwitchViewModel extends ViewModel {
         switchCount = 0;
     }
 
+    //trigger a method in the model when the test is complete
     private void concludeTest() {
         testModel.elapsedEndTime = Utility.sysTime();
         testModel.concludeTest();

@@ -13,6 +13,7 @@ import java.util.Date;
 
 /*
 Class:		AntiSaccadeModel
+Author:     Michael Giannini
 Purpose:    This class contains the required data for the AntiSaccade test and is responsible for
             outputting a .csv file at the conclusion of the test.
 */
