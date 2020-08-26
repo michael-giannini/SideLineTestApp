@@ -7,7 +7,7 @@ This ReadMe will describe the SideLine Test App tests, the outputs, and how to i
 
 ## Getting Started
 
-To install the app, copy the 'SideLineTestApp.apk' file to any directory on your Android phone or tablet. Once copied, navigate to the file on your device and open the file to install the app. Accept all warnings about installing a third part app. 
+To install the app, copy the 'SidelineTestApp.apk' file to any directory on your Android phone or tablet. Once copied, navigate to the file on your device and open the file to install the app. Accept all warnings about installing a third part app. 
 
 ## Tests Within the App
 
